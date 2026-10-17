@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save the Date | Pranathi & Salil</title>
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --maroon: #4A0E17;
+      --gold: #D4AF37;
+      --gold-light: #F3E5AB;
+      --bg-cream: #FFFDF9;
+      --text-dark: #2C2C2C;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Envelope Animation Overlay */
+    #envelope-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100vh;
+      background-color: var(--maroon);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 1.2s ease-in-out, visibility 1.2s;
+    }
+
+    .seal-btn {
+      background: linear-gradient(135deg, var(--gold), #B8860B);
+      color: var(--maroon);
+      border: 2px solid var(--gold-light);
+      padding: 16px 36px;
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .seal-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      background: radial-gradient(circle, rgba(255,253,249,1) 0%, rgba(243,229,171,0.25) 100%);
+      position: relative;
+    }
+    .hero h3 {
+      font-family: 'Cinzel', serif;
+      color: var(--maroon);
+      font-size: 1.1rem;
+      letter-spacing: 4px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4.2rem;
+      color: var(--maroon);
+      margin: 15px 0;
+    }
+    .hero h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      letter-spacing: 3px;
+    }
+
+    /* Navigation / Tabs */
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      background: var(--maroon);
+      padding: 15px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--gold-light);
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      padding: 8px 18px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      border-color: var(--gold);
+      color: #FFF;
+    }
+
+    /* Content Sections */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 50px 20px;
+    }
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .card {
+      background: #FFF;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 8px;
+      padding: 35px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    h2.section-title {
+      font-family: 'Cinzel', serif;
+      color: var(--maroon);
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+    }
+    h2.section-title::after {
+      content: '';
+      display: block;
+      width: 50%;
+      height: 2px;
+      background: var(--gold);
+      margin: 8px auto 0;
+    }
+
+    /* Buttons & Links */
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--maroon);
+      color: var(--gold-light);
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 4px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      margin: 10px 5px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn-action:hover { background: #33090F; }
+
+    /* Embed Map */
+    .map-container {
+      width: 100%;
+      height: 320px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 20px;
+      border: 1px solid var(--gold);
+    }
+
+    /* Embed RSVP Form Frame */
+    .rsvp-frame-container {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Opening Animation Reveal -->
+  <div id="envelope-overlay">
+    <div style="text-align:center; color: var(--gold-light); margin-bottom: 20px;">
+      <p style="font-family:'Cinzel'; letter-spacing: 4px; font-size: 1rem;">शुभ विवाह • కళ్యాణం</p>
+    </div>
+    <button class="seal-btn" onclick="openInvitation()">OPEN INVITATION</button>
+  </div>
+
+  <!-- 2. Save The Date Hero Header -->
+  <section class="hero">
+    <h3>Save The Date</h3>
+    <h1>Pranathi &amp; Salil</h1>
+    <h2>03 . 12 . 2026</h2>
+    <p style="margin-top: 15px; font-style: italic; color: #666;">Celebrating the Union of Marathi &amp; Telugu Traditions</p>
+  </section>
+
+  <!-- 3. Navigation Bar -->
+  <nav class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('wedding', this)">The Wedding</button>
+    <button class="tab-btn" onclick="switchTab('reception', this)">The Reception</button>
+    <button class="tab-btn" onclick="switchTab('rsvp', this)">RSVP</button>
+  </nav>
+
+  <!-- Content Container -->
+  <div class="container">
+    
+    <!-- PAGE 1: WEDDING CEREMONY -->
+    <div id="wedding" class="section active">
+      <div class="card">
+        <h2 class="section-title">Wedding Ceremony</h2>
+        <p style="font-size: 1.1rem; color: var(--maroon); font-weight: 600;">Sumuhurtham: 09:38 AM</p>
+        <p style="margin: 15px 0; color: #555;">Join us as we blend Maharashtrian and Telugu traditions in our sacred wedding ceremony.</p>
+        
+        <p><strong>Venue:</strong> Kalidas Marriage Hall, Purushottam Kheraj ROad, Mulund West, Mumbai, Maharashtra 400080</p>
+        
+        <div style="margin-top: 20px;">
+          <!-- Add to Google Calendar Link -->
+          <a class="btn-action" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pranathi+%26+Salil+Wedding&dates=20261203T044500Z/20261024T080000Z&details=Join+us+for+the+Wedding+Ceremony+at+Kalidas+Marriage+Hall.&location=Kalidas+Marriage+Hall,+Purushottam+Kheraj+Road,+Mulund+West,+Mumbai" target="_blank">
+            <i class="far fa-calendar-plus"></i> Add to Google Calendar
+          </a>
+          <!-- Google Maps Link -->
+          <a class="btn-action" href="https://www.google.com/maps/place/Kalidas+Marriage+Hall+(Managed+By+Dhanraj+Hospitality)/@19.1726044,72.9458057,17z/data=!4m14!1m7!3m6!1s0x3be7b90469086693:0xd128790a34de536b!2sKalidas+Marriage+Hall+(Managed+By+Dhanraj+Hospitality)!8m2!3d19.1726044!4d72.9483806!16s%2Fg%2F11fr6t4yz7!3m5!1s0x3be7b90469086693:0xd128790a34de536b!8m2!3d19.1726044!4d72.9483806!16s%2Fg%2F11fr6t4yz7?entry=ttu&g_ep=EgoyMDI2MTAxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank">
+            <i class="fas fa-map-marker-alt"></i> Open in Maps
+          </a>
+        </div>
+
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.012356980482!2d72.86877931538411!3d19.108226055964894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c83c2ad2dfa7%3A0x6b306a4b1bb92a7e!2sITC%20Maratha%2C%20a%20Luxury%20Collection%20Hotel%2C%20Mumbai!5e0!3m2!1sen!2sin!4v1625000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 2: RECEPTION -->
+    <div id="reception" class="section">
+      <div class="card">
+        <h2 class="section-title">Grand Evening Reception</h2>
+        <p style="font-size: 1.1rem; color: var(--maroon); font-weight: 600;">Time: 7:00 PM Onwards</p>
+        <p style="margin: 15px 0; color: #555;">Celebrate with us over dinner, music, and festivities following the daytime ceremony.</p>
+        
+        <p><strong>Venue:</strong>Kalidas Marriage Hall, Purushottam Kheraj ROad, Mulund West, Mumbai, Maharashtra 400080</p>
+
+        <div style="margin-top: 20px;">
+          <a class="btn-action" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pranathi+%26+Salil+Reception&dates=20261203T140000Z/20261203T180000Z&details=Evening+Reception+and+Dinner&location=Kalidas+Marriage+Hall,+Purushottam+Kheraj+Road,+Mulund+West,+Mumbai" target="_blank">
+            <i class="far fa-calendar-plus"></i> Add to Google Calendar
+          </a>
+          <a class="btn-action" href="https://www.google.com/maps/place/Kalidas+Marriage+Hall+(Managed+By+Dhanraj+Hospitality)/@19.1726044,72.9458057,17z/data=!4m14!1m7!3m6!1s0x3be7b90469086693:0xd128790a34de536b!2sKalidas+Marriage+Hall+(Managed+By+Dhanraj+Hospitality)!8m2!3d19.1726044!4d72.9483806!16s%2Fg%2F11fr6t4yz7!3m5!1s0x3be7b90469086693:0xd128790a34de536b!8m2!3d19.1726044!4d72.9483806!16s%2Fg%2F11fr6t4yz7?entry=ttu&g_ep=EgoyMDI2MTAxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank">
+            <i class="fas fa-map-marker-alt"></i> Open in Maps
+          </a>
+        </div>
+
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/place/Kalidas+Marriage+Hall+(Managed+By+Dhanraj+Hospitality)/@19.1726044,72.9458057,17z/data=!4m14!1m7!3m6!1s0x3be7b90469086693:0xd128790a34de536b!2sKalidas+Marriage+Hall+(Managed+By+Dhanraj+Hospitality)!8m2!3d19.1726044!4d72.9483806!16s%2Fg%2F11fr6t4yz7!3m5!1s0x3be7b90469086693:0xd128790a34de536b!8m2!3d19.1726044!4d72.9483806!16s%2Fg%2F11fr6t4yz7?entry=ttu&g_ep=EgoyMDI2MTAxMy4wIKXMDSoASAFQAw%3D%3D" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 3: EMBEDDED INLINE RSVP FORM -->
+    <div id="rsvp" class="section">
+      <div class="card" style="padding: 20px 10px;">
+        <h2 class="section-title">RSVP</h2>
+        <p style="margin-bottom: 20px; color: #666; padding: 0 15px;">Kindly confirm your presence by November 22, 2026, to help us organize seating and arrangements.</p>
+        
+        <div class="rsvp-frame-container">
+          <!-- REPLACE 'YOUR_GOOGLE_FORM_ID' BELOW WITH YOUR ACTUAL GOOGLE FORM ID -->
+          <iframe 
+            src="https://docs.google.com/forms/d/e/1FAIpQLSdGOpDXyaqKpf4xafM0JZQSdQOAqvyd3ZBaiVEXvYVSl78K4g/viewform?usp=publish-editor" 
+            width="100%" 
+            height="750" 
+            frameborder="0" 
+            marginheight="0" 
+            marginwidth="0"
+            style="border: none;">Loading RSVP Form...</iframe>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function openInvitation() {
+      const overlay = document.getElementById('envelope-overlay');
+      overlay.style.opacity = '0';
+      setTimeout(() => {
+        overlay.style.visibility = 'hidden';
+      }, 1200);
+    }
+
+    function switchTab(tabId, element) {
+      document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      
+      document.getElementById(tabId).classList.add('active');
+      element.classList.add('active');
+    }
+  </script>
+</body>
+</html>
