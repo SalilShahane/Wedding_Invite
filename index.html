@@ -4,309 +4,763 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Save the Date | Pranathi & Salil</title>
-  <!-- Google Fonts & FontAwesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
     :root {
-      --maroon: #4A0E17;
-      --gold: #D4AF37;
-      --gold-light: #F3E5AB;
-      --bg-cream: #FFFDF9;
-      --text-dark: #2C2C2C;
+      --maroon-deep: #4A080F;
+      --crimson-text: #7A121C;
+      --gold-royal: #C5A059;
+      --gold-bright: #E5C158;
+      --gold-light: #F7E7B4;
+      --bg-cream: #FAF5EE;
+      --card-bg: #FFFDF9;
+      --text-dark: #2C2825;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Montserrat', sans-serif;
       background-color: var(--bg-cream);
       color: var(--text-dark);
       overflow-x: hidden;
-      scroll-behavior: smooth;
     }
 
-    /* Envelope Animation Overlay */
-    #envelope-overlay {
+    /* -------------------------------------------------------------
+       1. TRADITIONAL INDIAN DOOR OPENING OVERLAY
+    ------------------------------------------------------------- */
+    #gate-overlay {
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100vh;
-      background-color: var(--maroon);
+      top: 0; left: 0; width: 100vw; height: 100vh;
       z-index: 1000;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      transition: opacity 1.2s ease-in-out, visibility 1.2s;
+      align-items: center;
+      background: #1a0305;
+      perspective: 1500px;
+      overflow: hidden;
+      transition: visibility 1.8s ease, opacity 0.5s ease;
     }
 
-    .seal-btn {
-      background: linear-gradient(135deg, var(--gold), #B8860B);
-      color: var(--maroon);
-      border: 2px solid var(--gold-light);
-      padding: 16px 36px;
-      font-family: 'Cinzel', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .seal-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+    /* Toran Garland on Door Frame Top */
+    .door-toran {
+      position: absolute;
+      top: 0; left: 0; width: 100%;
+      height: 70px;
+      z-index: 25;
+      background: repeating-linear-gradient(90deg, #E65100 0px, #E65100 25px, #FFB300 25px, #FFB300 50px, #2E7D32 50px, #2E7D32 75px);
+      clip-path: polygon(0 0, 100% 0, 100% 40%, 95% 100%, 90% 40%, 85% 100%, 80% 40%, 75% 100%, 70% 40%, 65% 100%, 60% 40%, 55% 100%, 50% 40%, 45% 100%, 40% 40%, 35% 100%, 30% 40%, 25% 100%, 20% 40%, 15% 100%, 10% 40%, 5% 100%, 0 40%);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
     }
 
-    /* Hero Section */
-    .hero {
+    /* Wooden Door Halves */
+    .door-panel {
+      position: absolute;
+      top: 0;
+      width: 50vw;
       height: 100vh;
+      background: 
+        radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%),
+        linear-gradient(90deg, #3a1507 0%, #5c240d 20%, #3a1507 50%, #5c240d 80%, #290d03 100%);
+      box-shadow: inset 0 0 80px rgba(0,0,0,0.9);
+      transition: transform 1.6s cubic-bezier(0.65, 0, 0.07, 1);
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      text-align: center;
-      padding: 20px;
-      background: radial-gradient(circle, rgba(255,253,249,1) 0%, rgba(243,229,171,0.25) 100%);
-      position: relative;
-    }
-    .hero h3 {
-      font-family: 'Cinzel', serif;
-      color: var(--maroon);
-      font-size: 1.1rem;
-      letter-spacing: 4px;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-    .hero h1 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 4.2rem;
-      color: var(--maroon);
-      margin: 15px 0;
-    }
-    .hero h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.4rem;
-      color: var(--gold);
-      letter-spacing: 3px;
+      padding: 60px 20px;
+      z-index: 10;
+      border: 12px solid #280b03;
     }
 
-    /* Navigation / Tabs */
-    .nav-tabs {
+    /* Brass studs & carved pattern on wooden door */
+    .door-panel::before {
+      content: '';
+      position: absolute;
+      inset: 20px;
+      border: 3px double var(--gold-royal);
+      border-radius: 8px;
+      background-image: radial-gradient(var(--gold-royal) 20%, transparent 20%);
+      background-size: 40px 40px;
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    .door-left {
+      left: 0;
+      transform-origin: left center;
+      border-right: 4px solid var(--gold-royal);
+    }
+
+    .door-right {
+      right: 0;
+      transform-origin: right center;
+      border-left: 4px solid var(--gold-royal);
+    }
+
+    /* Brass Door Handles */
+    .door-handle {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 45px;
+      height: 120px;
+      background: linear-gradient(135deg, #E5C158, #8A651B, #E5C158);
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 0 8px #FFF;
       display: flex;
       justify-content: center;
-      gap: 15px;
-      background: var(--maroon);
-      padding: 15px;
+      align-items: center;
+    }
+    .door-left .door-handle { right: 15px; }
+    .door-right .door-handle { left: 15px; }
+
+    .door-handle-ring {
+      width: 32px;
+      height: 55px;
+      border: 4px solid #4A3205;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    }
+
+    /* Side Flanking Glowing Diyas on Door */
+    .diya-container {
+      position: absolute;
+      bottom: 40px;
+      z-index: 15;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .diya-left { left: 80px; }
+    .diya-right { right: 80px; }
+
+    .flame {
+      width: 16px;
+      height: 26px;
+      background: linear-gradient(to top, #FF3D00, #FFEA00, #FFF);
+      border-radius: 50% 50% 20% 20%;
+      box-shadow: 0 0 20px #FF9100, 0 0 40px #FFEA00;
+      animation: flicker 0.15s infinite alternate;
+    }
+    @keyframes flicker {
+      0% { transform: scale(1) rotate(-1deg); opacity: 0.95; }
+      100% { transform: scale(1.1) rotate(1deg); opacity: 1; }
+    }
+
+    /* Door Wax Seal Trigger Button */
+    #seal-container {
+      position: relative;
+      z-index: 30;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    #seal-container:hover {
+      transform: scale(1.05);
+    }
+
+    .wax-seal {
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, var(--gold-bright) 0%, var(--gold-royal) 60%, #6E4E0C 100%);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 30px rgba(229, 193, 88, 0.7), 0 10px 25px rgba(0,0,0,0.8);
+      border: 4px solid #FFF;
+      animation: sealPulse 2s infinite alternate;
+    }
+    @keyframes sealPulse {
+      0% { box-shadow: 0 0 20px rgba(229, 193, 88, 0.5); }
+      100% { box-shadow: 0 0 45px rgba(229, 193, 88, 1), 0 0 15px #FFF; }
+    }
+
+    /* Open Door Animation States */
+    #gate-overlay.opened .door-left {
+      transform: rotateY(-105deg);
+    }
+    #gate-overlay.opened .door-right {
+      transform: rotateY(105deg);
+    }
+    #gate-overlay.opened #seal-container,
+    #gate-overlay.opened .diya-container {
+      opacity: 0;
+      transform: scale(0.3);
+      pointer-events: none;
+      transition: all 0.6s ease;
+    }
+
+    /* Canvas for falling petals */
+    #petal-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* -------------------------------------------------------------
+       2. TYPOGRAPHY & VISUAL THEME FROM IMAGE TEMPLATE
+    ------------------------------------------------------------- */
+    .font-script { font-family: 'Great Vibes', cursive; }
+    .font-cinzel { font-family: 'Cinzel', serif; }
+    .font-serif-classic { font-family: 'Playfair Display', serif; }
+
+    /* Sticky Navigation Header for Scrolling */
+    .top-nav {
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 200;
+      background: rgba(74, 8, 15, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid var(--gold-royal);
+      padding: 12px 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
     }
-    .tab-btn {
-      background: none;
-      border: none;
+    .top-nav a {
       color: var(--gold-light);
       font-family: 'Cinzel', serif;
-      font-size: 1rem;
-      padding: 8px 18px;
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 6px 16px;
       transition: all 0.3s;
+      border-radius: 20px;
     }
-    .tab-btn.active, .tab-btn:hover {
-      border-color: var(--gold);
+    .top-nav a:hover {
       color: #FFF;
+      background: rgba(197, 160, 89, 0.3);
     }
 
-    /* Content Sections */
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 50px 20px;
-    }
-    .section { display: none; }
-    .section.active { display: block; }
-
-    .card {
-      background: #FFF;
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      border-radius: 8px;
-      padding: 35px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-      margin-bottom: 30px;
-      text-align: center;
-    }
-
-    h2.section-title {
-      font-family: 'Cinzel', serif;
-      color: var(--maroon);
-      font-size: 1.8rem;
-      margin-bottom: 25px;
+    /* Hero Invitation Frame */
+    .hero-card {
+      background: linear-gradient(180deg, #FFFDF9 0%, #FAF2E8 100%);
+      border: 1px solid rgba(197, 160, 89, 0.4);
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(74, 8, 15, 0.1);
       position: relative;
-      display: inline-block;
-    }
-    h2.section-title::after {
-      content: '';
-      display: block;
-      width: 50%;
-      height: 2px;
-      background: var(--gold);
-      margin: 8px auto 0;
+      overflow: hidden;
     }
 
-    /* Buttons & Links */
+    .temple-arch-frame {
+      position: absolute;
+      inset: 12px;
+      border: 1.5px solid var(--gold-royal);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+    .temple-arch-frame::after {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border: 1px dashed rgba(197, 160, 89, 0.5);
+      border-radius: 8px;
+    }
+
+    /* Section Cards Styling */
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(197, 160, 89, 0.4);
+      border-radius: 16px;
+      padding: 40px 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+      margin-bottom: 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      color: var(--crimson-text);
+      font-size: 1.85rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    /* Action Buttons */
     .btn-action {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: var(--maroon);
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--maroon-deep), #29080B);
       color: var(--gold-light);
       padding: 12px 24px;
-      text-decoration: none;
-      border-radius: 4px;
+      border-radius: 30px;
       font-family: 'Cinzel', serif;
-      font-size: 0.9rem;
-      margin: 10px 5px;
-      border: none;
-      cursor: pointer;
-      transition: background 0.3s;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      margin: 8px 6px;
+      border: 1px solid var(--gold-royal);
+      box-shadow: 0 4px 14px rgba(74, 8, 15, 0.25);
+      transition: all 0.3s ease;
+      text-decoration: none;
     }
-    .btn-action:hover { background: #33090F; }
+    .btn-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(74, 8, 15, 0.4);
+      background: linear-gradient(135deg, #7A121C, var(--maroon-deep));
+      color: #FFF;
+    }
 
-    /* Embed Map */
     .map-container {
       width: 100%;
-      height: 320px;
-      border-radius: 8px;
+      height: 330px;
+      border-radius: 12px;
       overflow: hidden;
-      margin-top: 20px;
-      border: 1px solid var(--gold);
+      margin-top: 24px;
+      border: 2px solid var(--gold-royal);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
     }
 
-    /* Embed RSVP Form Frame */
     .rsvp-frame-container {
       width: 100%;
-      border-radius: 8px;
+      border-radius: 12px;
       overflow: hidden;
       margin-top: 15px;
+      border: 1px solid rgba(197, 160, 89, 0.4);
+    }
+
+    /* Brass Bell Sway Animation */
+    .bell-sway {
+      transform-origin: top center;
+      animation: bellSway 3.5s ease-in-out infinite alternate;
+    }
+    @keyframes bellSway {
+      0% { transform: rotate(-5deg); }
+      100% { transform: rotate(5deg); }
     }
   </style>
 </head>
 <body>
 
-  <!-- 1. Opening Animation Reveal -->
-  <div id="envelope-overlay">
-    <div style="text-align:center; color: var(--gold-light); margin-bottom: 20px;">
-      <p style="font-family:'Cinzel'; letter-spacing: 4px; font-size: 1rem;">शुभ विवाह • కళ్యాణం</p>
+  <!-- Petals Floating Effect Canvas -->
+  <canvas id="petal-canvas"></canvas>
+
+
+  <!-- =========================================================
+       1. TRADITIONAL INDIAN DOOR OPENING ANIMATION OVERLAY
+  ========================================================== -->
+  <div id="gate-overlay">
+    <!-- Top Decorative Toran/Garland -->
+    <div class="door-toran"></div>
+
+    <!-- Left Carved Wooden Door -->
+    <div class="door-panel door-left">
+      <div class="text-center pt-8">
+        <svg class="w-10 h-10 text-amber-300 mx-auto opacity-70" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2L15 8L21 9L17 14L18 20L12 17L6 20L7 14L3 9L9 8L12 2Z"/>
+        </svg>
+      </div>
+      
+      <div class="door-handle">
+        <div class="door-handle-ring"></div>
+      </div>
+
+      <div class="diya-container diya-left">
+        <div class="flame"></div>
+        <svg class="w-12 h-8 text-amber-500 drop-shadow-md" viewBox="0 0 24 16" fill="currentColor">
+          <path d="M2 10C2 13.3 6.5 16 12 16C17.5 16 22 13.3 22 10C22 8 18 6 12 6C6 6 2 8 2 10Z"/>
+        </svg>
+      </div>
     </div>
-    <button class="seal-btn" onclick="openInvitation()">OPEN INVITATION</button>
+
+    <!-- Right Carved Wooden Door -->
+    <div class="door-panel door-right">
+      <div class="text-center pt-8">
+        <svg class="w-10 h-10 text-amber-300 mx-auto opacity-70" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2L15 8L21 9L17 14L18 20L12 17L6 20L7 14L3 9L9 8L12 2Z"/>
+        </svg>
+      </div>
+
+      <div class="door-handle">
+        <div class="door-handle-ring"></div>
+      </div>
+
+      <div class="diya-container diya-right">
+        <div class="flame"></div>
+        <svg class="w-12 h-8 text-amber-500 drop-shadow-md" viewBox="0 0 24 16" fill="currentColor">
+          <path d="M2 10C2 13.3 6.5 16 12 16C17.5 16 22 13.3 22 10C22 8 18 6 12 6C6 6 2 8 2 10Z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Center Wax Seal & Ringing Bell Interactive Trigger -->
+    <div id="seal-container" onclick="openInvitation()">
+      <!-- Hanging Temple Bell -->
+      <div class="mb-3 animate-bounce">
+        <svg class="w-12 h-12 text-amber-300 drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2a2 2 0 00-2 2v1.09A7.001 7.001 0 004 12v5l-2 2v1h20v-1l-2-2v-5a7.001 7.001 0 00-6-6.91V4a2 2 0 00-2-2zm0 20a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+        </svg>
+      </div>
+
+      <!-- Wax Seal Button with Lord Ganesha Emblem -->
+      <div class="wax-seal">
+        <svg class="w-16 h-16 text-amber-950" viewBox="0 0 100 100" fill="currentColor">
+          <path d="M50,10 C42,10 38,15 38,22 C38,28 42,32 45,34 C40,36 32,42 32,52 C32,62 40,68 48,68 C50,68 52,78 46,82 C42,85 36,82 34,80 C32,78 28,80 30,84 C33,90 44,92 52,86 C60,80 58,68 54,66 C62,64 68,56 68,48 C68,38 60,34 56,33 C58,30 62,26 62,20 C62,14 56,10 50,10 Z M50,16 C53,16 56,18 56,21 C56,24 53,26 50,26 C47,26 44,24 44,21 C44,18 47,16 50,16 Z"/>
+        </svg>
+      </div>
+
+      <p class="mt-4 font-cinzel text-amber-200 text-sm tracking-widest uppercase font-bold">
+        Shubh Vivah
+      </p>
+      <p class="text-xs text-amber-300/80 font-light mt-1">Tap to Open Royal Invitation</p>
+    </div>
   </div>
 
-  <!-- 2. Save The Date Hero Header -->
-  <section class="hero">
-    <h3>Save The Date</h3>
-    <h1>Pranathi &amp; Salil</h1>
-    <h2>03 . 12 . 2026</h2>
-    <p style="margin-top: 15px; font-style: italic; color: #666;">Celebrating the Union of Marathi &amp; Telugu Traditions</p>
-  </section>
 
-  <!-- 3. Navigation Bar -->
-  <nav class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('wedding', this)">The Wedding</button>
-    <button class="tab-btn" onclick="switchTab('reception', this)">The Reception</button>
-    <button class="tab-btn" onclick="switchTab('rsvp', this)">RSVP</button>
+  <!-- =========================================================
+       2. STICKY TOP NAVIGATION BAR FOR SMOOTH SCROLLING
+  ========================================================== -->
+  <nav class="top-nav flex justify-center items-center gap-2 sm:gap-6">
+    <a href="#hero">Home</a>
+    <a href="#wedding">Wedding</a>
+    <a href="#reception">Reception</a>
+    <a href="#rsvp">RSVP</a>
   </nav>
 
-  <!-- Content Container -->
-  <div class="container">
-    
-    <!-- PAGE 1: WEDDING CEREMONY -->
-    <div id="wedding" class="section active">
-      <div class="card">
-        <h2 class="section-title">Wedding Ceremony</h2>
-        <p style="font-size: 1.1rem; color: var(--maroon); font-weight: 600;">Sumuhurtham: 09:38 AM</p>
-        <p style="margin: 15px 0; color: #555;">Join us as we blend Maharashtrian and Telugu traditions in our sacred wedding ceremony.</p>
-        
-        <p><strong>Venue: </strong> Kalidas Marriage Hall, Purushottam Kheraj Road, Mulund West, Mumbai, Maharashtra 400080</p>
-        
-        <div style="margin-top: 20px;">
-          <!-- Add to Google Calendar Link -->
-          <a class="btn-action" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pranathi+%26+Salil+Wedding&dates=20261203T044500Z/20261024T080000Z&details=Join+us+for+the+Wedding+Ceremony+at+Kalidas+Marriage+Hall.&location=Kalidas+Marriage+Hall,+Purushottam+Kheraj+Road,+Mulund+West,+Mumbai" target="_blank">
-            <i class="far fa-calendar-plus"></i> Add to Google Calendar
-          </a>
-          <!-- Google Maps Link -->
-          <a class="btn-action" href="https://www.google.com/maps/place/Kalidas+Marriage+Hall+(Managed+By+Dhanraj+Hospitality)/@19.1726044,72.9458057,17z/data=!4m14!1m7!3m6!1s0x3be7b90469086693:0xd128790a34de536b!2sKalidas+Marriage+Hall+(Managed+By+Dhanraj+Hospitality)!8m2!3d19.1726044!4d72.9483806!16s%2Fg%2F11fr6t4yz7!3m5!1s0x3be7b90469086693:0xd128790a34de536b!8m2!3d19.1726044!4d72.9483806!16s%2Fg%2F11fr6t4yz7?entry=ttu&g_ep=EgoyMDI2MTAxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank">
-            <i class="fas fa-map-marker-alt"></i> Open in Maps
-          </a>
-        </div>
 
-        <div class="map-container">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.012356980482!2d72.86877931538411!3d19.108226055964894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c83c2ad2dfa7%3A0x6b306a4b1bb92a7e!2sITC%20Maratha%2C%20a%20Luxury%20Collection%20Hotel%2C%20Mumbai!5e0!3m2!1sen!2sin!4v1625000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  <!-- =========================================================
+       3. HERO HEADER - WEDDING INVITATION CARD (Template Style)
+  ========================================================== -->
+  <header id="hero" class="py-12 px-4 flex justify-center items-center relative min-h-screen">
+    <div class="hero-card w-full max-w-2xl p-6 sm:p-12 text-center my-auto">
+      <div class="temple-arch-frame"></div>
+
+      <!-- Corner Hanging Floral Garlands SVG -->
+      <div class="absolute top-0 left-0 w-28 sm:w-36 pointer-events-none">
+        <svg viewBox="0 0 100 100" fill="none">
+          <path d="M0,0 Q30,20 0,60" stroke="#E63946" stroke-width="6"/>
+          <path d="M0,0 Q50,30 10,80" stroke="#F4A261" stroke-width="5"/>
+          <circle cx="15" cy="40" r="5" fill="#E76F51"/>
+          <circle cx="25" cy="65" r="6" fill="#D4AF37"/>
+        </svg>
+      </div>
+      <div class="absolute top-0 right-0 w-28 sm:w-36 pointer-events-none transform scale-x-[-1]">
+        <svg viewBox="0 0 100 100" fill="none">
+          <path d="M0,0 Q30,20 0,60" stroke="#E63946" stroke-width="6"/>
+          <path d="M0,0 Q50,30 10,80" stroke="#F4A261" stroke-width="5"/>
+          <circle cx="15" cy="40" r="5" fill="#E76F51"/>
+          <circle cx="25" cy="65" r="6" fill="#D4AF37"/>
+        </svg>
+      </div>
+
+      <!-- Top Hanging Temple Bells (Left & Right) -->
+      <div class="absolute top-4 left-6 sm:left-12 bell-sway hidden sm:block">
+        <svg class="w-8 h-12 text-amber-700 opacity-90" viewBox="0 0 24 36" fill="currentColor">
+          <line x1="12" y1="0" x2="12" y2="12" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 12a5 5 0 00-5 5v4l-2 2v1h14v-1l-2-2v-4a5 5 0 00-5-5zm0 14a2 2 0 01-2-2h4a2 2 0 01-2 2z"/>
+        </svg>
+      </div>
+      <div class="absolute top-4 right-6 sm:right-12 bell-sway hidden sm:block">
+        <svg class="w-8 h-12 text-amber-700 opacity-90" viewBox="0 0 24 36" fill="currentColor">
+          <line x1="12" y1="0" x2="12" y2="12" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 12a5 5 0 00-5 5v4l-2 2v1h14v-1l-2-2v-4a5 5 0 00-5-5zm0 14a2 2 0 01-2-2h4a2 2 0 01-2 2z"/>
+        </svg>
+      </div>
+
+      <!-- Glowing Golden Lord Ganesha Emblem Top -->
+      <div class="mt-4 mb-3">
+        <svg class="w-16 h-16 sm:w-20 sm:h-20 mx-auto text-amber-600 drop-shadow-md" viewBox="0 0 100 100" fill="currentColor">
+          <path d="M50,10 C42,10 38,15 38,22 C38,28 42,32 45,34 C40,36 32,42 32,52 C32,62 40,68 48,68 C50,68 52,78 46,82 C42,85 36,82 34,80 C32,78 28,80 30,84 C33,90 44,92 52,86 C60,80 58,68 54,66 C62,64 68,56 68,48 C68,38 60,34 56,33 C58,30 62,26 62,20 C62,14 56,10 50,10 Z M50,16 C53,16 56,18 56,21 C56,24 53,26 50,26 C47,26 44,24 44,21 C44,18 47,16 50,16 Z"/>
+        </svg>
+      </div>
+
+      <!-- Divine Blessings Text -->
+      <p class="font-cinzel text-xs sm:text-sm text-amber-900 tracking-widest uppercase font-semibold mb-2">
+        With the divine blessings of our families
+      </p>
+      <p class="font-cinzel text-xs text-amber-900/70 tracking-widest uppercase mb-6">
+        We cordially invite you to celebrate the wedding of
+      </p>
+
+      <!-- Floral Gold Line Divider -->
+      <div class="flex items-center justify-center gap-3 mb-6">
+        <div class="h-px w-12 bg-amber-600/40"></div>
+        <svg class="w-5 h-5 text-amber-700" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+        </svg>
+        <div class="h-px w-12 bg-amber-600/40"></div>
+      </div>
+
+      <!-- Couple Names in Elegant Script -->
+      <div class="my-4">
+        <h1 class="font-script text-6xl sm:text-8xl text-red-900 drop-shadow-sm leading-tight">
+          Pranathi
+        </h1>
+        <p class="font-cinzel italic text-amber-700 my-1 text-xl sm:text-2xl">&amp;</p>
+        <h1 class="font-script text-6xl sm:text-8xl text-red-900 drop-shadow-sm leading-tight">
+          Salil
+        </h1>
+      </div>
+
+      <!-- Date Box Display (Matching Image Template) -->
+      <div class="my-8 py-4 border-y border-amber-600/30 flex justify-center items-center gap-4 sm:gap-8">
+        <div class="text-right">
+          <p class="font-cinzel text-xs sm:text-sm text-amber-900 font-bold tracking-widest uppercase">THURSDAY</p>
+          <p class="font-cinzel text-xs text-amber-700 tracking-wider">DECEMBER</p>
+        </div>
+        <div class="text-4xl sm:text-5xl font-cinzel font-bold text-red-900 px-4 border-x border-amber-600/40">
+          03
+        </div>
+        <div class="text-left">
+          <p class="font-cinzel text-xs sm:text-sm text-amber-900 font-bold tracking-widest uppercase">2026</p>
+          <p class="font-cinzel text-xs text-amber-700 tracking-wider">MUHURAT: 09:38 AM</p>
+        </div>
+      </div>
+
+      <p class="font-serif-classic italic text-sm text-amber-950 mb-6">
+        Celebrating the Union of Marathi &amp; Telugu Traditions
+      </p>
+
+      <!-- Bottom Brass Deepam & Kalash Motif Accent -->
+      <div class="flex justify-between items-end px-4 pt-4">
+        <div class="text-amber-800">
+          <svg class="w-8 h-10" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L10 8H14L12 2ZM12 22C16.4 22 20 18.4 20 14H4C4 18.4 7.6 22 12 22Z"/>
+          </svg>
+        </div>
+        <p class="font-script text-2xl text-red-900">Your presence will make our day complete</p>
+        <div class="text-amber-800">
+          <svg class="w-8 h-10" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L10 8H14L12 2ZM12 22C16.4 22 20 18.4 20 14H4C4 18.4 7.6 22 12 22Z"/>
+          </svg>
         </div>
       </div>
     </div>
+  </header>
 
-    <!-- PAGE 2: RECEPTION -->
-    <div id="reception" class="section">
-      <div class="card">
-        <h2 class="section-title">Grand Evening Reception</h2>
-        <p style="font-size: 1.1rem; color: var(--maroon); font-weight: 600;">Time: 7:00 PM Onwards</p>
-        <p style="margin: 15px 0; color: #555;">Celebrate with us over dinner, music, and festivities following the daytime ceremony.</p>
-        
-        <p><strong>Venue: </strong>Kalidas Marriage Hall, Purushottam Kheraj Road, Mulund West, Mumbai, Maharashtra 400080</p>
 
-        <div style="margin-top: 20px;">
-          <a class="btn-action" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pranathi+%26+Salil+Reception&dates=20261203T140000Z/20261203T180000Z&details=Evening+Reception+and+Dinner&location=Kalidas+Marriage+Hall,+Purushottam+Kheraj+Road,+Mulund+West,+Mumbai" target="_blank">
-            <i class="far fa-calendar-plus"></i> Add to Google Calendar
-          </a>
-          <a class="btn-action" href="https://www.google.com/maps/place/Kalidas+Marriage+Hall+(Managed+By+Dhanraj+Hospitality)/@19.1726044,72.9458057,17z/data=!4m14!1m7!3m6!1s0x3be7b90469086693:0xd128790a34de536b!2sKalidas+Marriage+Hall+(Managed+By+Dhanraj+Hospitality)!8m2!3d19.1726044!4d72.9483806!16s%2Fg%2F11fr6t4yz7!3m5!1s0x3be7b90469086693:0xd128790a34de536b!8m2!3d19.1726044!4d72.9483806!16s%2Fg%2F11fr6t4yz7?entry=ttu&g_ep=EgoyMDI2MTAxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank">
-            <i class="fas fa-map-marker-alt"></i> Open in Maps
-          </a>
-        </div>
+  <!-- =========================================================
+       4. CONTINUOUS SCROLLING CONTENT SECTIONS
+  ========================================================== -->
+  <main class="max-w-3xl mx-auto px-4 pb-20">
 
-        <div class="map-container">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.012356980482!2d72.86877931538411!3d19.108226055964894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c83c2ad2dfa7%3A0x6b306a4b1bb92a7e!2sITC%20Maratha%2C%20a%20Luxury%20Collection%20Hotel%2C%20Mumbai!5e0!3m2!1sen!2sin!4v1625000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        </div>
-      </div>
+    <!-- ELEGANT SECTION SEPARATOR -->
+    <div class="flex justify-center items-center my-10 gap-4 text-amber-700 opacity-80">
+      <div class="h-px w-24 bg-amber-600/40"></div>
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 3c-1.5 2.5-3 5.5-3 8 0 2.5 1.5 4 3 4s3-1.5 3-4c0-2.5-1.5-5.5-3-8zm-5 6c-2 1.5-4 4.5-4 7 0 2.5 2 3.5 4 3.5 1.5 0 3-.8 4-2.2-1.5-1.8-2.5-4.3-2-8.3zm10 0c.5 4-.5 6.5-2 8.3 1 1.4 2.5 2.2 4 2.2 2 0 4-1 4-3.5 0-2.5-2-5.5-4-7z"/>
+      </svg>
+      <div class="h-px w-24 bg-amber-600/40"></div>
     </div>
 
-    <!-- PAGE 3: EMBEDDED INLINE RSVP FORM -->
-    <div id="rsvp" class="section">
-      <div class="card" style="padding: 20px 10px;">
-        <h2 class="section-title">RSVP</h2>
-        <p style="margin-bottom: 20px; color: #666; padding: 0 15px;">Kindly confirm your presence by November 22, 2026, to help us organize seating and arrangements.</p>
-        
-        <div class="rsvp-frame-container">
-          <!-- REPLACE 'YOUR_GOOGLE_FORM_ID' BELOW WITH YOUR ACTUAL GOOGLE FORM ID -->
-          <iframe 
-            src="https://docs.google.com/forms/d/e/1FAIpQLSdGOpDXyaqKpf4xafM0JZQSdQOAqvyd3ZBaiVEXvYVSl78K4g/viewform?usp=publish-editor" 
-            width="100%" 
-            height="750" 
-            frameborder="0" 
-            marginheight="0" 
-            marginwidth="0"
-            style="border: none;">Loading RSVP Form...</iframe>
-        </div>
+
+    <!-- 1. WEDDING CEREMONY SECTION -->
+    <section id="wedding" class="section-card">
+      <!-- Top Garland Accent -->
+      <div class="text-amber-700 mb-2">
+        <i class="fas fa-om text-2xl"></i>
       </div>
+
+      <h2 class="section-title">Wedding Ceremony</h2>
+      
+      <p class="font-cinzel text-lg text-red-900 font-bold mb-2">
+        Sumuhurtham: 09:38 AM
+      </p>
+      
+      <p class="text-sm sm:text-base text-gray-700 my-4 max-w-xl mx-auto leading-relaxed">
+        Join us as we perform the sacred wedding rituals, blending Maharashtrian and Telugu customs in solemn joy.
+      </p>
+      
+      <div class="my-6 p-4 rounded-xl bg-amber-500/10 border border-amber-600/30 inline-block text-left">
+        <p class="text-sm sm:text-base text-gray-800">
+          <i class="fas fa-map-marker-alt text-red-900 mr-2"></i>
+          <strong>Venue:</strong> Kalidas Marriage Hall, Purushottam Kheraj Road, Mulund West, Mumbai, Maharashtra 400080
+        </p>
+      </div>
+
+      <div>
+        <a class="btn-action" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pranathi+%26+Salil+Wedding&dates=20261203T040800Z/20261203T080000Z&details=Join+us+for+the+Wedding+Ceremony+at+Kalidas+Marriage+Hall.&location=Kalidas+Marriage+Hall,+Purushottam+Kheraj+Road,+Mulund+West,+Mumbai" target="_blank">
+          <i class="far fa-calendar-plus"></i> Add to Calendar
+        </a>
+        <a class="btn-action" href="https://www.google.com/maps/place/Kalidas+Marriage+Hall+(Managed+By+Dhanraj+Hospitality)/@19.1726044,72.9458057,17z/data=!4m14!1m7!3m6!1s0x3be7b90469086693:0xd128790a34de536b!2sKalidas+Marriage+Hall+(Managed+By+Dhanraj+Hospitality)!8m2!3d19.1726044!4d72.9483806!16s%2Fg%2F11fr6t4yz7!3m5!1s0x3be7b90469086693:0xd128790a34de536b!8m2!3d19.1726044!4d72.9483806!16s%2Fg%2F11fr6t4yz7" target="_blank">
+          <i class="fas fa-directions"></i> Open Map Directions
+        </a>
+      </div>
+
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.6189914488347!2d72.94580571538501!3d19.172604387031945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b90469086693%3A0xd128790a34de536b!2sKalidas%20Marriage%20Hall%20(Managed%20By+Dhanraj%20Hospitality)!5e0!3m2!1sen!2sin!4v1680000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </section>
+
+
+    <!-- ELEGANT SECTION SEPARATOR -->
+    <div class="flex justify-center items-center my-10 gap-4 text-amber-700 opacity-80">
+      <div class="h-px w-24 bg-amber-600/40"></div>
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 3c-1.5 2.5-3 5.5-3 8 0 2.5 1.5 4 3 4s3-1.5 3-4c0-2.5-1.5-5.5-3-8zm-5 6c-2 1.5-4 4.5-4 7 0 2.5 2 3.5 4 3.5 1.5 0 3-.8 4-2.2-1.5-1.8-2.5-4.3-2-8.3zm10 0c.5 4-.5 6.5-2 8.3 1 1.4 2.5 2.2 4 2.2 2 0 4-1 4-3.5 0-2.5-2-5.5-4-7z"/>
+      </svg>
+      <div class="h-px w-24 bg-amber-600/40"></div>
     </div>
 
-  </div>
 
+    <!-- 2. RECEPTION SECTION -->
+    <section id="reception" class="section-card">
+      <div class="text-amber-700 mb-2">
+        <i class="fas fa-glass-cheers text-2xl"></i>
+      </div>
+
+      <h2 class="section-title">Evening Reception</h2>
+      
+      <p class="font-cinzel text-lg text-red-900 font-bold mb-2">
+        Time: 7:00 PM Onwards
+      </p>
+      
+      <p class="text-sm sm:text-base text-gray-700 my-4 max-w-xl mx-auto leading-relaxed">
+        Celebrate with us over music, laughter, and a festive dinner following the daytime wedding ceremonies.
+      </p>
+      
+      <div class="my-6 p-4 rounded-xl bg-amber-500/10 border border-amber-600/30 inline-block text-left">
+        <p class="text-sm sm:text-base text-gray-800">
+          <i class="fas fa-building text-red-900 mr-2"></i>
+          <strong>Venue:</strong> Kalidas Marriage Hall, Purushottam Kheraj Road, Mulund West, Mumbai, Maharashtra 400080
+        </p>
+      </div>
+
+      <div>
+        <a class="btn-action" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pranathi+%26+Salil+Reception&dates=20261203T133000Z/20261203T173000Z&details=Evening+Reception+and+Dinner&location=Kalidas+Marriage+Hall,+Purushottam+Kheraj+Road,+Mulund+West,+Mumbai" target="_blank">
+          <i class="far fa-calendar-plus"></i> Add to Calendar
+        </a>
+        <a class="btn-action" href="https://www.google.com/maps/place/Kalidas+Marriage+Hall+(Managed+By+Dhanraj+Hospitality)/@19.1726044,72.9458057,17z/data=!4m14!1m7!3m6!1s0x3be7b90469086693:0xd128790a34de536b!2sKalidas+Marriage+Hall+(Managed+By+Dhanraj+Hospitality)!8m2!3d19.1726044!4d72.9483806!16s%2Fg%2F11fr6t4yz7!3m5!1s0x3be7b90469086693:0xd128790a34de536b!8m2!3d19.1726044!4d72.9483806!16s%2Fg%2F11fr6t4yz7" target="_blank">
+          <i class="fas fa-map-marked-alt"></i> Open Map Directions
+        </a>
+      </div>
+    </section>
+
+
+    <!-- ELEGANT SECTION SEPARATOR -->
+    <div class="flex justify-center items-center my-10 gap-4 text-amber-700 opacity-80">
+      <div class="h-px w-24 bg-amber-600/40"></div>
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 3c-1.5 2.5-3 5.5-3 8 0 2.5 1.5 4 3 4s3-1.5 3-4c0-2.5-1.5-5.5-3-8zm-5 6c-2 1.5-4 4.5-4 7 0 2.5 2 3.5 4 3.5 1.5 0 3-.8 4-2.2-1.5-1.8-2.5-4.3-2-8.3zm10 0c.5 4-.5 6.5-2 8.3 1 1.4 2.5 2.2 4 2.2 2 0 4-1 4-3.5 0-2.5-2-5.5-4-7z"/>
+      </svg>
+      <div class="h-px w-24 bg-amber-600/40"></div>
+    </div>
+
+
+    <!-- 3. RSVP SECTION -->
+    <section id="rsvp" class="section-card px-2 sm:px-6">
+      <div class="text-amber-700 mb-2">
+        <i class="fas fa-envelope-open-text text-2xl"></i>
+      </div>
+
+      <h2 class="section-title">RSVP</h2>
+      
+      <p class="text-xs sm:text-sm text-gray-700 mb-6 max-w-lg mx-auto">
+        Please kindly confirm your attendance by <strong>November 22, 2026</strong>, to help us make necessary arrangements.
+      </p>
+
+      <div class="rsvp-frame-container">
+        <!-- Active Embedded Google Form -->
+        <iframe 
+          src="https://docs.google.com/forms/d/e/1FAIpQLSdGOpDXyaqKpf4xafM0JZQSdQOAqvyd3ZBaiVEXvYVSl78K4g/viewform?usp=publish-editor" 
+          width="100%" 
+          height="780" 
+          frameborder="0" 
+          marginheight="0" 
+          marginwidth="0"
+          style="border: none;">Loading RSVP Form...</iframe>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer Banner -->
+  <footer class="bg-amber-950 text-amber-200 text-center py-6 border-t border-amber-600/40 font-cinzel text-xs">
+    <p class="tracking-widest">Pranathi &amp; Salil • December 3, 2026</p>
+    <p class="text-amber-400/60 mt-1">Mulund, Mumbai</p>
+  </footer>
+
+
+  <!-- JavaScript Animations -->
   <script>
+    // 1. Royal 3D Door Swing Animation
     function openInvitation() {
-      const overlay = document.getElementById('envelope-overlay');
-      overlay.style.opacity = '0';
+      const gate = document.getElementById('gate-overlay');
+      gate.classList.add('opened');
+      
+      // Start Flower Petals Shower
+      startPetals();
+
+      // Fade out overlay after door opens
       setTimeout(() => {
-        overlay.style.visibility = 'hidden';
-      }, 1200);
+        gate.style.opacity = '0';
+        setTimeout(() => {
+          gate.style.visibility = 'hidden';
+        }, 500);
+      }, 1600);
     }
 
-    function switchTab(tabId, element) {
-      document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    // 2. Petal Animation Simulation
+    function startPetals() {
+      const canvas = document.getElementById('petal-canvas');
+      const ctx = canvas.getContext('2d');
       
-      document.getElementById(tabId).classList.add('active');
-      element.classList.add('active');
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      const petals = [];
+      const numPetals = 40;
+      const colors = ['#E63946', '#F4A261', '#E76F51', '#D4AF37', '#FFC6FF'];
+
+      for (let i = 0; i < numPetals; i++) {
+        petals.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          size: Math.random() * 8 + 6,
+          speedY: Math.random() * 1.8 + 0.8,
+          speedX: Math.random() * 1.2 - 0.6,
+          angle: Math.random() * 360,
+          spin: Math.random() * 2 - 1,
+          color: colors[Math.floor(Math.random() * colors.length)]
+        });
+      }
+
+      function animatePetals() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        petals.forEach(p => {
+          p.y += p.speedY;
+          p.x += Math.sin(p.y * 0.01) + p.speedX;
+          p.angle += p.spin;
+
+          if (p.y > canvas.height) {
+            p.y = -20;
+            p.x = Math.random() * canvas.width;
+          }
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.angle * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = 0.75;
+
+          ctx.beginPath();
+          ctx.ellipse(0, 0, p.size, p.size / 2, 0, 0, 2 * Math.PI);
+          ctx.fill();
+          ctx.restore();
+        });
+
+        requestAnimationFrame(animatePetals);
+      }
+
+      animatePetals();
     }
   </script>
 </body>
